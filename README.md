@@ -218,7 +218,7 @@ Secure postgress default user:
 ```bash
 gcloud sql users set-password postgres \
     --instance=my-postgres-instance \
-    --password=your_secure_password
+    --password=MariaGomez7979
 ```
 
 
@@ -249,12 +249,14 @@ gcloud sql instances describe my-postgres-instance --format="value(connectionNam
 
 This will output something like: `your-project-id:europe-west2:my-postgres-instance`
 
+dbs-cloud-481310:europe-west2:my-postgres-instance
+
 ### 5.2 Create the DATABASE_URL Secret
 
 Now create the `DATABASE_URL` secret, **replacing the placeholders** with your actual values:
 
 ```bash
-echo -n "postgresql://secure_user:secure_password@/client_info?host=/cloudsql/YOUR_PROJECT_ID:REGION:INSTANCE_NAME" | \
+echo -n "postgresql://secure_user:secure_password@/client_info?host=/cloudsql/dbs-cloud-481310:europe-west2:my-postgres-instance" | \
 gcloud secrets create DATABASE_URL --data-file=-
 ```
 
@@ -287,7 +289,7 @@ Allow App Engine to access the `DATABASE_URL` secret:
 
 ```bash
 gcloud secrets add-iam-policy-binding DATABASE_URL \
-    --member="serviceAccount:<PROJECT_ID>@appspot.gserviceaccount.com" \
+    --member="serviceAccount:dbs-cloud-481310@appspot.gserviceaccount.com" \
     --role="roles/secretmanager.secretAccessor"
 ```
 
@@ -374,7 +376,7 @@ The following instruction shows deployment using Cloud Build triggers. If you pr
 
 1. Add a remote repository to your project:
    ```bash
-   git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/<YOUR_REPOSITORY>.git
+   git remote add origin https://github.com/Esteban0007/DBS_CLOUD.git
    ```
 2. Push your code to GitHub:
    ```bash
@@ -388,8 +390,8 @@ Set up a trigger in Google Cloud to deploy your app on every commit:
 ```bash
 gcloud beta builds triggers create github \
     --name="deploy-visit-logs-app" \
-    --repo-name="<YOUR_REPOSITORY>" \
-    --repo-owner="<YOUR_GITHUB_USERNAME>" \
+    --repo-name="DBS_CLOUD" \
+    --repo-owner="Esteban0007" \
     --branch-pattern=".*" \
     --build-config="cloudbuild.yaml"
 ```
@@ -402,11 +404,11 @@ Replace `<YOUR_REPOSITORY>` and `<YOUR_GITHUB_USERNAME>` with your repository de
 
 1. Visit your application at:
    ```
-   https://<YOUR_PROJECT_ID>.appspot.com
+   https://dbs-cloud-481310.appspot.com
    ```
 2. Check the visitor logs at:
    ```
-   https://<YOUR_PROJECT_ID>.appspot.com/logs
+   https://dbs-cloud-481310.appspot.com/logs
    ```
 
 ---
