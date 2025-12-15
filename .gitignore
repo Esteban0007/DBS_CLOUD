@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/macos,osx,windows,visualstudio,visualstudiocode,virtualenv,venv,dotenv,compressedarchive,archives,jetbrains+all
 # Edit at https://www.toptal.com/developers/gitignore?templates=macos,osx,windows,visualstudio,visualstudiocode,virtualenv,venv,dotenv,compressedarchive,archives,jetbrains+all
 
+# INCLUDES the standard exclusions
+
 ### Archives ###
 # It's better to unpack these files and commit the raw source because
 # git has its own built in compression methods.
