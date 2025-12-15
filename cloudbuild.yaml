@@ -1,4 +1,5 @@
 steps:
+  
   # Step 1: Install dependencies
   - name: 'node:22'
     entrypoint: 'npm'
