@@ -6,7 +6,7 @@ This document briefly summarizes the steps I completed to prepare the project an
 
 - Project ID: `dbs-cloud-481310`
 - Secret `DATABASE_URL`:
-  `postgresql://secure_user:secure_password@/client_info?host=/cloudsql/dbs-cloud-481310:europe-west2:my-postgres-instance`
+  `postgresql://USER:PASSWORD@/client_info?host=/cloudsql/dbs-cloud-481310:europe-west2:my-postgres-instance`
 
 ---
 
@@ -70,7 +70,7 @@ gcloud sql instances create my-postgres-instance \
 ```bash
 gcloud sql users set-password postgres \
 	--instance=my-postgres-instance \
-	--password=MariaGomez7979
+	--password=YOUR_SECURE_PASSWORD
 ```
 
 ### 4.3 Create database and application user
@@ -80,7 +80,7 @@ gcloud sql databases create client_info --instance=my-postgres-instance
 
 gcloud sql users create secure_user \
 	--instance=my-postgres-instance \
-	--password=secure_password
+	--password=YOUR_APP_PASSWORD
 ```
 
 ## 5. Store DATABASE_URL in Secret Manager
@@ -98,7 +98,7 @@ Expected output (example): `dbs-cloud-481310:europe-west2:my-postgres-instance`
 ### 5.2 Create the `DATABASE_URL` secret
 
 ```bash
-echo -n "postgresql://secure_user:secure_password@/client_info?host=/cloudsql/dbs-cloud-481310:europe-west2:my-postgres-instance" | \
+echo -n "postgresql://secure_user:YOUR_APP_PASSWORD@/client_info?host=/cloudsql/dbs-cloud-481310:europe-west2:my-postgres-instance" | \
 gcloud secrets create DATABASE_URL --data-file=-
 ```
 
